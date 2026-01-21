@@ -175,7 +175,7 @@ app.get("/api/stats", async (req, res) => {
 
   const PORT = process.env.PORT || 10000; // 10000 en local si tu veux coller à Render
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Web + API listening on port ${PORT}`);
+    console.log(`Web + API: https://satisfaction-survey-sfmtescnologies.onrender.com/${PORT}`);
   });
 })();
 
