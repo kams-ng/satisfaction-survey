@@ -173,10 +173,13 @@ app.get("/api/stats", async (req, res) => {
 (async () => {
   await initDb();
 
-  const PORT = process.env.PORT || 10000; // 10000 en local si tu veux coller à Render
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Web + API: https://satisfaction-survey-sfmtescnologies.onrender.com/${PORT}`);
-  });
+  const publicUrl = process.env.RENDER_EXTERNAL_URL || "http://localhost";
+  console.log(`Public URL: ${publicUrl}`);
+
+//   const PORT = process.env.PORT || 10000; // 10000 en local si tu veux coller à Render
+//   app.listen(PORT, "0.0.0.0", () => {
+//     console.log(`Web + API listening on port ${https://satisfaction-survey-sfmtescnologies.onrender.com/}`);
+//   });
 })();
 
 
