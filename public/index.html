@@ -1,218 +1,304 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Enquête Satisfaction</title>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 850px; margin: 24px auto; padding: 0 12px; }
-    .title{ display:flex; align-items:center; gap:10px; margin: 0 0 12px; }
-    .title-icon{ width:204px; height:54px; object-fit:contain; }
-    .card { background:oklch(97.472% 0.00523 248.363); border: 1px solid #ddd; border-radius: 10px; padding: 16px; margin-bottom: 14px; }
-    label { display:block; margin: 10px 0 6px; font-weight: 600; }
-    input, select, textarea { width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; }
-    textarea { min-height: 90px; }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .stars { display: inline-flex; gap: 6px; }
-    .star { font-size: 22px; cursor: pointer; user-select: none; }
-    .muted { color: #666; font-size: 13px; margin-top: 6px; }
-    .hidden { display: none; }
-    .actions { display:flex; gap: 10px; margin-top: 14px; }
-    button { padding: 10px 14px; border-radius: 8px; border: 1px solid #333; background: #111; color: #fff; cursor: pointer; }
-    button.secondary { background: #fff; color: #111; border-color: #bbb; }
-    .msg { padding: 10px; border-radius: 8px; margin-top: 10px; }
-    .ok { background:#e7f7ee; border:1px solid #8cd5a6; }
-    .err { background:#fdecec; border:1px solid #f1a6a6; }
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Enquête Satisfaction</title>
+    <link rel="icon" href="/assets/sfm.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="output.css" />
+    <style>
+      .muted {
+        color: var(--color-yellow-500);
+        font-size: 13px;
+        margin-top: 6px;
+      }
+      .hidden {
+        display: none;
+      }
 
-  <h2 class="title">
-  <img src="/assets/logo2.png" alt="Logo" class="title-icon">
-  Enquête de satisfaction client
-  </h2>
+      .msg {
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 10px;
+      }
+      .stars {
+        display: inline-flex;
+        gap: 6px;
+      }
+      .star {
+        font-size: 22px;
+        cursor: pointer;
 
-  <form id="form" class="card">
-    <div class="row">
-      <div>
-        <label>Email</label>
-        <input id="email" type="email" required placeholder="client@exemple.com" />
-      </div>
-      <div>
-        <label>Nom du client</label>
-        <input id="client_name" required placeholder="Nom" />
-      </div>
+        user-select: none;
+      }
+      .ok {
+        background: #e7f7ee;
+        border: 1px solid #8cd5a6;
+      }
+      .err {
+        background: #fdecec;
+        border: 1px solid #f1a6a6;
+      }
+    </style>
+  </head>
+  <body class="max-w-lg mx-auto">
+    <div class="flex items-center flex-col justify-center">
+      <img src="/assets/logo2.png" alt="Logo" class="logo mb-3" />
+      <h2 class="font-bold text-2xl text-blue-700">
+        Enquête de satisfaction client
+      </h2>
     </div>
 
-    <label>Projet</label>
-    <select id="project" required>
-      <option value="">-- Sélectionner --</option>
-      <option>1. Planification de mesures radio – Sites obstrués (Dossier CI) SSV</option>
-      <option>2. Mesures Benchmark CRC Janvier 2026 Douala, Yaounde, Bertoua, Sangmelima, Ebolowa</option>
-      <option>3. Foumbot | 4G ZTE Single/Dual Streaming Beamforming</option>
-      <option>4. [External] LMS 4G Huawei DT_Foumbot</option>
-      <option>5. [External] LMS 4G Huawei DT_Bafoussam</option>
-      <option>6. Drive Test Qualification de la LMS-REC :: Douala Cluster 3</option>
-    </select>
+    <form id="form" class="m-5">
+      <div class="mb-5">
+        <label for="email" class="block mb-2.5 text-sm font-medium text-heading"
+          >Email</label
+        >
+        <input
+          type="email"
+          id="email"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+          placeholder="client@exemple.com"
+          required
+        />
+      </div>
+      <div class="mb-5">
+        <label
+          for="client_name"
+          class="block mb-2.5 text-sm font-medium text-heading"
+          >Nom</label
+        >
+        <input
+          type="text"
+          id="client_name"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+          placeholder="Nom"
+          required
+        />
+      </div>
 
-    <hr style="margin:16px 0; border:none; border-top:1px solid #eee;">
+      <div></div>
 
-    <!-- Ratings -->
-    <div id="ratings"></div>
+      <label class="block mb-2.5 text-sm font-medium text-heading"
+        >Projet</label
+      >
+      <select
+        id="project"
+        class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+        required
+      >
+        <option value="">-- Sélectionner --</option>
+        <option>
+          1. Planification de mesures radio – Sites obstrués (Dossier CI) SSV
+        </option>
+        <option>
+          2. Mesures Benchmark CRC Janvier 2026 Douala, Yaounde, Bertoua,
+          Sangmelima, Ebolowa
+        </option>
+        <option>3. Foumbot | 4G ZTE Single/Dual Streaming Beamforming</option>
+        <option>4. [External] LMS 4G Huawei DT_Foumbot</option>
+        <option>5. [External] LMS 4G Huawei DT_Bafoussam</option>
+        <option>
+          6. Drive Test Qualification de la LMS-REC :: Douala Cluster 3
+        </option>
+      </select>
 
-    <label>Commentaire global du projet</label>
-    <textarea id="global_comment" placeholder="Votre retour global..."></textarea>
+      <div
+        class="bg-neutral-primary-soft block max-w-lg my-4 p-6 border border-default rounded-base shadow-xs"
+      >
+        <!-- Ratings -->
+        <div id="ratings"></div>
 
-    <div class="actions">
-      <button type="submit">Soumettre</button>
-      <button type="button" class="secondary" id="submitAndNew">Soumettre & Nouveau</button>
-    </div>
+        <label class="block mb-2.5 text-sm font-medium text-heading"
+          >Commentaire global du projet</label
+        >
+        <textarea
+          id="global_comment"
+          placeholder="Votre retour global..."
+          rows="4"
+          class="bg-neutral-secondary-medium my-2 border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full p-3.5 shadow-xs placeholder:text-body"
+        ></textarea>
+      </div>
 
-    <div id="message" class="msg hidden"></div>
-    <div class="muted">Astuce: si une note inf 4 , le champ “Suggestion” apparaît automatiquement.</div>
-  </form>
+      <hr style="margin: 16px 0; border: none; border-top: 1px solid #eee" />
 
-<script>
-const API = "/api";
+      <div class="flex gap-3">
+        <button
+          type="submit"
+          class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+        >
+          Soumettre
+        </button>
+        <button
+          type="button"
+          class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+          id="submitAndNew"
+        >
+          Soumettre & Nouveau
+        </button>
+      </div>
 
-const criteria = [
-  { key: "reactivity", label: "Réactivité" },
-  { key: "deadlines", label: "Conformité des délais" },
-  { key: "deliverables", label: "Qualité des livrables" },
-  { key: "professionalism", label: "Professionnalisme et innovation" },
-];
+      <div id="message" class="msg hidden"></div>
+     
+    </form>
 
-const ratingsDiv = document.getElementById("ratings");
+    <script>
+      const API = "/api";
 
-function makeRatingBlock(c) {
-  const wrap = document.createElement("div");
-  wrap.className = "card";
-  wrap.style.borderStyle = "dashed";
+      const criteria = [
+        { key: "reactivity", label: "Réactivité" },
+        { key: "deadlines", label: "Conformité des délais" },
+        { key: "deliverables", label: "Qualité des livrables" },
+        { key: "professionalism", label: "Professionnalisme et innovation" },
+      ];
 
-  const label = document.createElement("div");
-  label.style.fontWeight = "700";
-  label.textContent = c.label;
-  wrap.appendChild(label);
+      const ratingsDiv = document.getElementById("ratings");
 
-  const stars = document.createElement("div");
-  stars.className = "stars";
-  wrap.appendChild(stars);
+      function makeRatingBlock(c) {
+        const wrap = document.createElement("div");
+        const titleAndStars = document.createElement("div");
+        titleAndStars.className="flex justify-between gap-2 items-center my-2"
+        wrap.className = "card";
+        wrap.style.borderStyle = "dashed";
 
-  const value = document.createElement("input");
-  value.type = "hidden";
-  value.id = c.key;
-  value.value = "0";
-  wrap.appendChild(value);
+        const label = document.createElement("div");
+        label.style.fontWeight = "700";
+        label.textContent = c.label;
+        titleAndStars.appendChild(label);
 
-  const hint = document.createElement("div");
-  hint.className = "muted";
-  hint.id = c.key + "_hint";
-  hint.textContent = "Note: 0/5";
-  wrap.appendChild(hint);
+        const stars = document.createElement("div");
+        stars.className = "stars";
+        titleAndStars.appendChild(stars);
+        wrap.appendChild(titleAndStars);
 
-  const sugLabel = document.createElement("label");
-  sugLabel.textContent = "Suggestion / Justification (si note faible)";
-  wrap.appendChild(sugLabel);
+        const value = document.createElement("input");
+        value.type = "hidden";
+        value.id = c.key;
+        value.value = "0";
+        wrap.appendChild(value);
 
-  const suggestion = document.createElement("textarea");
-  suggestion.id = c.key + "_suggestion";
-  suggestion.className = "hidden";
-  suggestion.placeholder = "Que faut-il améliorer ?";
-  wrap.appendChild(suggestion);
+        const hint = document.createElement("div");
+        hint.className = "muted";
+        hint.id = c.key + "_hint";
+        hint.textContent = "Note: 0/5";
+        wrap.appendChild(hint);
 
-  function render(n) {
-    stars.innerHTML = "";
-    for (let i = 1; i <= 5; i++) {
-      const s = document.createElement("span");
-      s.className = "star";
-      s.textContent = i <= n ? "★" : "☆";
-      s.onclick = () => {
-        value.value = String(i);
-        document.getElementById(c.key + "_hint").textContent = `Note: ${i}/5`;
-        // suggestion visible if <=3
-        suggestion.classList.toggle("hidden", i > 3);
-        render(i);
-      };
-      stars.appendChild(s);
-    }
-  }
+        const sugLabel = document.createElement("label");
+        sugLabel.className = "mt-2.5 text-xs hidden text-body";
+        sugLabel.textContent = "Suggestion / Justification (si note faible)";
+        wrap.appendChild(sugLabel);
 
-  render(0);
-  return wrap;
-}
+        const suggestion = document.createElement("textarea");
+        suggestion.id = c.key + "_suggestion";
+        suggestion.className =
+          "hidden bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base my-2 focus:ring-brand focus:border-brand block w-full p-3.5 shadow-xs placeholder:text-body";
+        suggestion.placeholder = "Que faut-il améliorer ?";
+        wrap.appendChild(suggestion);
 
-criteria.forEach(c => ratingsDiv.appendChild(makeRatingBlock(c)));
+        function render(n) {
+          stars.innerHTML = "";
+          for (let i = 1; i <= 5; i++) {
+            const s = document.createElement("span");
+            s.className =
+              i <= n ? "star text-yellow-500" : "star text-gray-400";
+            s.textContent = i <= n ? "★" : "☆";
+            s.onclick = () => {
+              value.value = String(i);
+              document.getElementById(
+                c.key + "_hint"
+              ).textContent = `Note: ${i}/5`;
+              // suggestion visible if <=3
+              suggestion.classList.toggle("hidden", i > 3);
+              render(i);
+            };
+            stars.appendChild(s);
+          }
+        }
 
-const msg = document.getElementById("message");
-function showMessage(type, text) {
-  msg.className = "msg " + (type === "ok" ? "ok" : "err");
-  msg.textContent = text;
-  msg.classList.remove("hidden");
-}
+        render(0);
+        return wrap;
+      }
 
-function payloadFromForm() {
-  const p = {
-    email: document.getElementById("email").value.trim(),
-    client_name: document.getElementById("client_name").value.trim(),
-    project: document.getElementById("project").value.trim(),
-    global_comment: document.getElementById("global_comment").value.trim(),
-  };
+      criteria.forEach((c) => ratingsDiv.appendChild(makeRatingBlock(c)));
 
-  for (const c of criteria) {
-    const v = Number(document.getElementById(c.key).value);
-    if (!v || v < 1 || v > 5) throw new Error(`Veuillez noter: ${c.label}`);
-    p[c.key] = v;
+      const msg = document.getElementById("message");
+      function showMessage(type, text) {
+        msg.className = "msg " + (type === "ok" ? "ok" : "err");
+        msg.textContent = text;
+        msg.classList.remove("hidden");
+      }
 
-    const sug = document.getElementById(c.key + "_suggestion").value.trim();
-    p[c.key + "_suggestion"] = sug || "";
-  }
+      function payloadFromForm() {
+        const p = {
+          email: document.getElementById("email").value.trim(),
+          client_name: document.getElementById("client_name").value.trim(),
+          project: document.getElementById("project").value.trim(),
+          global_comment: document
+            .getElementById("global_comment")
+            .value.trim(),
+        };
 
-  return p;
-}
+        for (const c of criteria) {
+          const v = Number(document.getElementById(c.key).value);
+          if (!v || v < 1 || v > 5)
+            throw new Error(`Veuillez noter: ${c.label}`);
+          p[c.key] = v;
 
-async function submit(resetAfter) {
-  msg.classList.add("hidden");
-  try {
-    const data = payloadFromForm();
-    const r = await fetch(API + "/feedback", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+          const sug = document
+            .getElementById(c.key + "_suggestion")
+            .value.trim();
+          p[c.key + "_suggestion"] = sug || "";
+        }
 
-    const out = await r.json();
-    if (!r.ok) throw new Error(out.error || "Erreur lors de la soumission.");
+        return p;
+      }
 
-    showMessage("ok", out.message || "Enregistré.");
+      async function submit(resetAfter) {
+        msg.classList.add("hidden");
+        try {
+          const data = payloadFromForm();
+          const r = await fetch(API + "/feedback", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
 
-    if (resetAfter) {
-      document.getElementById("project").value = "";
-      document.getElementById("global_comment").value = "";
-      // reset stars
-      criteria.forEach(c => {
-        document.getElementById(c.key).value = "0";
-        document.getElementById(c.key + "_hint").textContent = "Note: 0/5";
-        const sug = document.getElementById(c.key + "_suggestion");
-        sug.value = "";
-        sug.classList.add("hidden");
+          const out = await r.json();
+          if (!r.ok)
+            throw new Error(out.error || "Erreur lors de la soumission.");
+
+          showMessage("ok", out.message || "Enregistré.");
+
+          if (resetAfter) {
+            document.getElementById("project").value = "";
+            document.getElementById("global_comment").value = "";
+            // reset stars
+            criteria.forEach((c) => {
+              document.getElementById(c.key).value = "0";
+              document.getElementById(c.key + "_hint").textContent =
+                "Note: 0/5";
+              const sug = document.getElementById(c.key + "_suggestion");
+              sug.value = "";
+              sug.classList.add("hidden");
+            });
+            // re-render rating blocks quickly by reloading page section
+            ratingsDiv.innerHTML = "";
+            criteria.forEach((c) => ratingsDiv.appendChild(makeRatingBlock(c)));
+          }
+        } catch (e) {
+          showMessage("err", e.message);
+        }
+      }
+
+      document.getElementById("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        submit(false);
       });
-      // re-render rating blocks quickly by reloading page section
-      ratingsDiv.innerHTML = "";
-      criteria.forEach(c => ratingsDiv.appendChild(makeRatingBlock(c)));
-    }
-  } catch (e) {
-    showMessage("err", e.message);
-  }
-}
 
-document.getElementById("form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  submit(false);
-});
-
-document.getElementById("submitAndNew").addEventListener("click", () => {
-  submit(true);
-});
-</script>
-</body>
+      document.getElementById("submitAndNew").addEventListener("click", () => {
+        submit(true);
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+  </body>
 </html>
