@@ -2148,6 +2148,9 @@
   .text-brand-light {
     color: var(--color-brand-light);
   }
+  .text-brand-strong {
+    color: var(--color-brand-strong);
+  }
   .text-fg-brand {
     color: var(--color-fg-brand);
   }
